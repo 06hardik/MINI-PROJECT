@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOURNAFY:Your Tournament Finder</title>
+    <link rel="shortcut icon" href="../pics/web logo.png" type="image/x-icon">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <style>
+      body {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-dark text-light" ng-app="Module" ng-controller="Controller">
+    <table class="table table-dark" style="text-align: center">
+      <tr>
+        <th scope="col">Sr. NO</th>
+        <th scope="col">Event Title</th>
+        <th scope="col">Date of Event</th>
+        <th scope="col">Time of Event</th>
+        <th scope="col">City</th>
+        <th scope="col">DELETE</th>
+      </tr>
+
+      <tr ng-repeat="obj in jsonArray">
+        <td>{{$index+1}}</td>
+        <td>{{obj.EventTitle}}</td>
+        <td>{{obj.DateofEvent}}</td>
+        <td>{{obj.TimeofEvent}}</td>
+        <td>{{obj.City}}</td>
+        <td>
+          <input
+            type="button"
+            value="Remove"
+            ng-click="doDelete(obj.rid,obj.emailid)"
+            class="btn btn-info"
+          />
+        </td>
+      </tr>
+    </table>
+  </body>
+  <script>
+    let activeUser = localStorage.getItem("activeUser");
+
+    var mymodule = angular.module("Module", []);
+    mymodule.controller("Controller", function ($scope, $http) {
+      $scope.jsonArray = [];
+      $scope.FetchALL = function () {
+        var url = "/fetch-tournaments?emailid=" + activeUser;
+        $http.get(url).then(resp, err);
+        function resp(response) {
+          $scope.jsonArray = response.data;
+
+          if ($scope.jsonArray.length == 0)
+            alert("No Tournament From this profile");
+        }
+        function err(response) {
+          alert(JSON.stringify(response.data));
+        }
+      };
+      $scope.FetchALL();
+      $scope.doDelete = function (rid, emailid) {
+        var url = "/delete-tournament?rid=" + rid + "&emailid=" + emailid;
+        $http.get(url).then(resp, err);
+        function resp(response) {
+          $scope.FetchALL();
+        }
+        function err(response) {
+          alert(JSON.stringify(response.data));
+        }
+      };
+    });
+  </script>
+</html>

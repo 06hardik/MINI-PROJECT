@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <title>TOURNAFY:Your Tournament Finder</title>
+    <link rel="shortcut icon" href="../pics/web logo.png" type="image/x-icon">
+    <script>
+      var mymodule = angular.module("kuchModule", []);
+
+      mymodule.controller("kuchController", function ($scope, $http) {
+        $scope.jsonArray = [];
+        $scope.selCity = "";
+        $scope.selGame = "";
+
+        $scope.doFetchAll = function () {
+          var url =
+            "/do-fetch-all-tournaments?City=" +
+            $scope.selCity +
+            "&Game=" +
+            $scope.selGame;
+
+          $http.get(url).then(allGoodFx, someBadFx);
+          function allGoodFx(response) {
+            $scope.jsonArray = response.data;
+            if ($scope.jsonArray.length == 0) {
+              alert("No Tournaments right Now... Stay Connected")
+            }
+          }
+          function someBadFx(response) {
+            alert(JSON.stringify(response.data));
+          }
+        };
+        $scope.cities = [{}];
+        $scope.games = [{}];
+        $scope.doFetchAllCities = function () {
+          var url = "/do-fetch-all-cities";
+
+          $http.get(url).then(allGoodFx, someBadFx);
+          function allGoodFx(response) {
+            //resp in JSON array
+            $scope.cities = response.data;
+            // alert(JSON.stringify( $scope.cities))
+          }
+          function someBadFx(response) {
+            alert(JSON.stringify(response.data));
+          }
+        };
+        $scope.doFetchAllGames = function () {
+          var url = "/do-fetch-all-games";
+
+          $http.get(url).then(allGoodFx, someBadFx);
+          function allGoodFx(response) {
+            //resp in JSON array
+            // alert(JSON.stringify(response.data));
+            $scope.games = response.data;
+          }
+
+          function someBadFx(response) {
+            alert(JSON.stringify(response.data));
+          }
+        };
+
+        $scope.oneRecord = {};
+        $scope.doShowDetails = function (index) {
+          $scope.oneRecord = $scope.jsonArray[index];
+        };
+      });
+    </script>
+    <style>
+      .modal-footer {
+        display: flex;
+        justify-content: center;
+        body{
+          background-color: #f5f5f5;
+        }
+      }
+    </style>
+  </head>
+  <body
+    ng-app="kuchModule"
+    ng-controller="kuchController"
+    ng-init="doFetchAllCities(); doFetchAllGames();"
+  >
+    <center>
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <select
+              class="form-select form-select-lg mb-3"
+              aria-label="Large select example"
+              ng-model="selCity"
+            >
+              <option value="" disabled selected>Select a City</option>
+              <option ng-repeat="obj in cities" value="{{obj.City}}">
+                {{obj.City}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select
+              ng-model="selGame"
+              class="form-select form-select-lg mb-3"
+              aria-label="Large select example"
+            >
+              <option value="" disabled selected>Select a Game</option>
+              <option ng-repeat="obj in games" value="{{obj.SportsCategory}}">
+                {{obj.SportsCategory}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <input
+              class="btn btn-outline-info"
+              type="button"
+              value="Find Tournaments"
+              ng-click="doFetchAll();"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 p-3 mb-2" ng-repeat="obj in jsonArray">
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">{{obj.EventTitle}}</h5>
+                <p class="card-text">Sports: {{obj.SportsCategory}}</p>
+                <p class="card-text">Location: {{obj.Location}}</p>
+                <p class="card-text">
+                  Registration Deadline: {{obj.lastDateofRegistration}}
+                </p>
+                <a
+                  href="#"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#detailsModal"
+                  ng-click="doShowDetails($index);"
+                  >Details</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </center>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="detailsModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Details of The Event
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <span class="fw-bold">Event Title: </span>{{oneRecord.EventTitle}}
+            </p>
+            <p><span class="fw-bold">Date: </span>{{oneRecord.DateofEvent}}</p>
+            <p><span class="fw-bold">Time: </span>{{oneRecord.TimeofEvent}}</p>
+            <p><span class="fw-bold">Loaction: </span>{{oneRecord.Location}}</p>
+            <p><span class="fw-bold">City</span>{{oneRecord.City}}</p>
+            <p>
+              <span class="fw-bold">Sports Category: </span
+              >{{oneRecord.SportsCategory}}
+            </p>
+            <p>
+              <span class="fw-bold">Age Criteria: </span>{{oneRecord.MinAge}} -
+              {{oneRecord.MaxAge}}
+            </p>
+            <p>
+              <span class="fw-bold">Last Date of Reg. :</span
+              >{{oneRecord.lastDateofRegistration}}
+            </p>
+            <p><span class="fw-bold">Entery Fees: </span>{{oneRecord.fee}}</p>
+            <p>
+              <span class="fw-bold">Prize Pool: </span>{{oneRecord.PrizeMoney}}
+            </p>
+            <p>
+              <span class="fw-bold">Contact: </span>{{oneRecord.ContactPerson}}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

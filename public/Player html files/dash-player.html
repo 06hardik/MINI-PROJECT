@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOURNAFY:Your Tournament Finder</title>
+  <link rel="shortcut icon" href="../pics/web logo.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      padding: 10px;
+      background-color: #F5F5F5;
+    }
+
+    .card {
+      color: #343a40;
+      height: 300px;
+    }
+
+    .fa-solid {
+      font-size: 60px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container text-center">
+    <h1>
+      Welcome
+      <small class="text-body-secondary" id="headingname"></small>
+    </h1>
+    <h3>PLAYER-DASHBOARD</h3>
+    <div class="row" style="margin-top: 130px;">
+      <div class="col-md-3">
+        <div class="card text-center" style="width: 18rem">
+          <i class="fa-solid fa-user"></i>
+          <div class="card-body">
+            <h5 class="card-title">My Profile</h5>
+            <p class="card-text">
+              Keep your details sharp. View and update your personal information, contact details, and registered
+              sports.
+            </p>
+            <a href="/player-details-page" class="btn btn-secondary">Edit Profile</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center" style="width: 18rem">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <div class="card-body">
+            <h5 class="card-title">Find a Tournament</h5>
+            <p class="card-text">
+              The next challenge is calling. Search for Cricket, Badminton, and Football tournaments happening right
+              here in your Neighbourhood.
+            </p>
+            <a href="/show-tournaments" class="btn btn-info">Explore Now</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center" style="width: 18rem">
+          <i class="fa-solid fa-gear"></i>
+          <div class="card-body">
+            <h5 class="card-title">Account Settings</h5>
+            <p class="card-text">
+              Fine-tune your experience. Manage your password, notification preferences, and privacy settings.
+            </p>
+            <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              style="margin-top: 25px;">Manage Settings</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center" style="width: 18rem">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up
+              the bulk of the card’s content.
+            </p><a class="btn btn-danger" onclick="doLogout()" style="margin-top: 30px;">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Change Password
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="txtEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" readonly />
+              <div id="emailHelp" class="form-text">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="txtoldPwd" class="form-label">Old Password</label>
+              <input type="password" class="form-control" id="txtoldPwd" />
+            </div>
+            <div class="mb-3">
+              <label for="txtnewPwd" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="txtnewPwd" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <input type="button" class="btn btn-primary" value="Save Changes" id="bttnSave" />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  let activeUser = localStorage.getItem("activeUser");
+  document.querySelector("#headingname").innerHTML = activeUser;
+  document.querySelector("#txtEmail").value = activeUser;
+
+
+  function doLogout() {
+    localStorage.removeItem("activeUser");
+    location.href = "../index.html";
+  }
+
+  $(document).ready(function () {
+    $('#bttnSave').click(function () {
+      let obj = {
+        type: 'get',
+        url: '/changePwd-player',
+        data: {
+          email: $("#txtEmail").val(),
+          Pwd: $("#txtoldPwd").val(),
+          newPwd: $("#txtnewPwd").val()
+        }
+      }
+      $.ajax(obj).then((response) => {
+        alert(response)
+      }).fail((err) => {
+        alert(err)
+      })
+    })
+
+  })
+
+</script>
+
+</html>

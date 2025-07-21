@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <title>TOURNAFY:Your Tournament Finder</title>
+    <link rel="shortcut icon" href="../pics/web logo.png" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      img{
+        width: 250px;
+        height: 150px;
+      }
+    </style>
+
+    <title>Document</title>
+    <script>
+      var mymodule = angular.module("kuchModule", []);
+
+      mymodule.controller("kuchController", function ($scope, $http) {
+        $scope.jsonArray = [];
+
+        $scope.doFetchAll = function () {
+          var url = "/do-fetch-all-players";
+
+          $http.get(url).then(allGoodFx, someBadFx);
+          function allGoodFx(response) {
+            $scope.jsonArray = response.data;
+            if($scope.jsonArray.length == 0){
+                h1 = document.createElement('h1')
+                h1.innerHTML = "NO PLAYERS RIGHT NOW"
+                
+                document.querySelector('body').append(h1)
+                document.querySelector('body').style.display = 'flex'
+                document.querySelector('body').style.justifyContent = 'center'
+            } 
+          }
+
+          function someBadFx(response) {
+            alert(JSON.stringify(response.data));
+          }
+        };
+        $scope.oneRecord = {};
+        $scope.doShowDetails = function (index) {
+          $scope.oneRecord = $scope.jsonArray[index];
+        };
+      });
+    </script>
+    <style>
+        .modal-footer{
+            display: flex;
+            justify-content: center;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+  </head>
+  <body
+    ng-app="kuchModule"
+    ng-controller="kuchController"
+    ng-init="doFetchAll();"
+  >
+    <center>
+      <h1>PLAYER MANAGEMENT</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 p-3 mb-2" ng-repeat="obj in jsonArray">
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">{{obj.emailid}}</h5>
+                <p class="card-text">Name: {{obj.Name}}</p>
+                <p class="card-text">Gender: {{obj.gender}}</p>
+                <p class="card-text">Contact: {{obj.contact}}</p>
+                <a
+                  href="#"
+                  class="btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#detailsModal"
+                  ng-click="doShowDetails($index);"
+                  style="background-color: #6f42c1;
+                  color: white;"
+                  >Details</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </center>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="detailsModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Details of The Event
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p><span class="fw-bold">Email ID: </span>{{oneRecord.emailid}}</p>
+              <p><span class="fw-bold">Name: </span>{{oneRecord.Name}}</p>
+              <p><span class="fw-bold">DOB: </span>{{oneRecord.DOB}}</p>
+              <p><span class="fw-bold">Contact: </span>{{oneRecord.contact}}</p>
+              <p><span class="fw-bold">Gender: </span>{{oneRecord.gender}}</p>
+              <p><span class="fw-bold">Address: </span>{{oneRecord.address}}</p>
+              <p><span class="fw-bold">Other: </span>{{oneRecord.other}}</p>
+              <p><span class="fw-bold">Proifle Pic: </span><img ng-src="{{oneRecord.picUrl}}" alt="nopic.jpg"></p>
+              <p><span class="fw-bold">Adhaar Image: </span><img ng-src="{{oneRecord.AdhaarUrl}}" alt="nopic.jpg"></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>
