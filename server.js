@@ -440,8 +440,8 @@ app.get("/forgot-pwd", async function (req, resp) {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: "hardikjindal2020@gmail.com",
-        pass: "wdty putp uzbv cxdy",
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD
       },
     });
     const mailOptions = {
@@ -470,7 +470,7 @@ app.post("/mail-Mssg", async function (req, resp) {
       secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        pass: process.env.GMAIL_APP_PASSWORD
       },
     });
     const mailOptions = {
