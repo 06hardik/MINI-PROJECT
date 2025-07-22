@@ -542,7 +542,6 @@
           data: {
             txtEmail: $("#txtEmail").val(),
             txtPwd: $("#txtPwd").val(),
-            txtSel: $("#txtSel").val(),
           },
         };
         $.ajax(obj)
@@ -599,25 +598,24 @@
           });
       });
 
-      $("#bttnMssg").click(function (event) {
-        event.preventDefault(); // Stop form from causing a page refresh
+      $('#bttnMssg').click(function(){
+        alert('hi')
         let obj = {
           type: "post",
           url: "/mail-Mssg",
-          data: {
-            txtName: $("#contactName").val(),
-            txtEmail: $("#contactEmail").val(),
-            txtMssg: $("#contactMessage").val(),
-          },
-        };
-        $.ajax(obj)
-          .then(function (response) {
-            alert(response);
-          })
-          .fail(function (err) {
-            alert(JSON.stringify(err));
-          });
-      });
+          data:{
+            txtName:$('#contactName').val(),
+            txtEmail:$('#contactEmail').val(),
+            txtMssg:$('#contactMessage').val()
+          }
+        }
+        $.ajax(obj).then(function (response) {
+          alert('hi2')
+          alert(response)
+        }).fail(function(err){
+          alert(JSON.stringify(err))
+        })
+      })
     });
   </script>
 </body>
