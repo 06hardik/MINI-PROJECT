@@ -462,30 +462,29 @@ app.get("/forgot-pwd", async function (req, resp) {
     resp.status(500).send("Server error.");
   }
 });
-app.get("/mail-Mssg", async function (req, resp) {
+app.post("/mail-Mssg", async function (req, resp) {
   try {
     const transporter = await nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: "hardikjindal2020@gmail.com",
-        pass: "wdty putp uzbv cxdy",
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
       },
     });
     const mailOptions = {
       from: {
         name: "hardik",
-        address: "hardikjindal2020@gmail.com",
+        address: `${req.body.txtEmail}`,
       },
-      to: [req.query.txtEmail],
-      subject: "Here is your Password...",
-      text: `Hi How are You? Please do not forget the password Again !!! 
-    
-    Password : ${pwd}`,
+      to: ['hardikjindal2020@gmail.com'],
+      subject: `Mail from ${req.body.txtName}`,
+      text: `${req.body.txtMssg}`
     };
     await transporter.sendMail(mailOptions);
-    resp.send("Password sent at your Email address");
+    console.log('hi3')
+    resp.send("Message sent successfully! Thank you for getting in touch.");
   } catch (error) {
     console.error("Error in /forgot-pwd:", error);
     resp.status(500).send("Server error.");

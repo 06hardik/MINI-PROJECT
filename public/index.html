@@ -546,7 +546,7 @@
                 ></textarea>
               </div>
               <input
-                type="submit"
+                type="button"
                 class="btn btn-primary"
                 style="
                   background-color: #fbc02d;
@@ -556,9 +556,8 @@
                   padding: 10px 25px;
                 "
                 id="bttnMssg"
+                value="Send Message"
               >
-                Send Message
-            </input>
             </form>
 
             <div style="margin-top: 30px; text-align: start">
@@ -896,15 +895,22 @@
       });
 
       $('#bttnMssg').click(function(){
+        alert('hi')
         let obj = {
-          type: "get",
+          type: "post",
           url: "/mail-Mssg",
           data:{
             txtName:$('#contactName').val(),
             txtEmail:$('#contactEmail').val(),
-            txtMssg:$('#contactMssg').val()
+            txtMssg:$('#contactMessage').val()
           }
         }
+        $.ajax(obj).then(function (response) {
+          alert('hi2')
+          alert(response)
+        }).fail(function(err){
+          alert(JSON.stringify(err))
+        })
       })
     });
   </script>
