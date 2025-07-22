@@ -1,489 +1,911 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOURNAFY:Your Tournament Finder</title>
+    <link rel="shortcut icon" href="./pics/web logo.png" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src=".../bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        background-color: #121212;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TOURNAFY:Your Tournament Finder</title>
-  <link rel="shortcut icon" href="./pics/web logo.png" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <script src=".../bootstrap.bundle.min.js"></script>
-  <style>
-    body {
-      background-color: #121212;
-    }
+      .header {
+        background-color: #1e1e1e;
+      }
 
-    .header {
-      background-color: #1E1E1E;
-    }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+      .logo {
+        width: 50px;
+        height: 45px;
+      }
 
-    .logo {
-      width: 50px;
-      height: 45px;
-    }
+      #signbtn {
+        border-radius: 20px;
+        background-color: #fbc02d;
+        color: #121212;
+      }
 
-    #signbtn {
-      border-radius: 20px;
-      background-color: #FBC02D;
-      color: #121212;
-    }
+      #logbtn {
+        background-color: transparent;
+        color: white;
+        border: 1px white solid;
+        border-radius: 20px;
+      }
 
-    #logbtn {
-      background-color: transparent;
-      color: white;
-      border: 1px white solid;
-      border-radius: 20px;
-    }
+      .d-block {
+        width: 1000px;
+        height: 650px;
+      }
 
-    .d-block {
-      width: 1000px;
-      height: 650px;
-    }
+      .services {
+        background-color: #121212;
+      }
 
-    .services {
-      background-color: #121212;
-    }
+      .services > h2 {
+        color: white;
+        text-decoration: underline;
+        text-decoration-color: #fbc02d;
+      }
 
-    .services>h2 {
-      color: white;
-      text-decoration: underline;
-      text-decoration-color: #FBC02D;
-    }
+      .services .card {
+        background-color: #1e1e1e;
+      }
 
-    .services .card {
-      background-color: #1E1E1E;
-    }
+      .services .card-title {
+        color: white;
+      }
 
-    .services .card-title {
-      color: white;
-    }
+      .services .card-text {
+        color: #bdbdbd;
+      }
 
-    .services .card-text {
-      color: #BDBDBD;
-    }
+      .fa-solid,
+      .fa-brands {
+        font-size: 70px;
+        color: #fbc02d;
+      }
 
-    .fa-solid,
-    .fa-brands {
-      font-size: 70px;
-      color: #FBC02D;
-    }
+      .mission {
+        background-color: #1e1e1e;
+      }
 
-    .mission {
-      background-color: #1E1E1E;
-    }
+      .mission > h2 {
+        color: #fff;
+      }
 
-    .mission>h2 {
-      color: #fff;
-    }
+      .text-mission {
+        color: #bdbdbd;
+        line-height: 30px;
+        margin-top: 30px;
+      }
 
-    .text-mission {
-      color: #BDBDBD;
-      line-height: 30px;
-      margin-top: 30px;
-    }
+      .main {
+        width: 1000px;
+        height: 650px;
+        margin: auto;
+        overflow: hidden;
+      }
 
-    .main {
-      width: 1000px;
-      height: 650px;
-      margin: auto;
-      overflow: hidden;
-    }
+      ul {
+        list-style: none;
+      }
 
-    ul {
-      list-style: none;
-    }
+      .links {
+        margin-left: 270px;
+        display: flex;
+        gap: 40px;
+      }
 
-    .links{
-      margin-left: 270px;
-      display: flex;
-      gap: 40px;
-    }
-
-    /* input {
+      /* input {
       background-color: #333333;
       border-color: lightgray;
       color: #333333;
     } */
-  </style>
-</head>
+    </style>
+  </head>
 
-<body>
-  <div class="header">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-1">
-          <img class="logo" src="./pics/web logo.png" alt="" />
-        </div>
-        <div class="col-md-3 fs-3 mt-1 fw-bold text-light">TOURNAFY</div>
-        <div class="col-md-2 fs-5 mt-2 text-secondary"><a href="#Services">SERVICES</a></div>
-        <div class="col-md-2 fs-5 mt-2 text-secondary"><a href="#Mission">MISSION</a></div>
-        <div class="col-md-2 fs-5 mt-2 text-secondary"><a href="#Contact">CONTACT US</a></div>
-
-        <div class="col-md-1 mt-1">
-          <input class="btn fw-medium" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-            value="Login" id="logbtn" />
-        </div>
-        <div class="col-md-1 mt-1">
-          <input class="btn btn-dark fw-medium" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
-            value="Signup" id="signbtn" />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="main">
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="./pics/wp1852918-badminton-wallpapers.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="./pics/basketball.avif" class="d-block w-100" alt="...">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
-  <div class="services text-center" id="Services" data-aos="fade-down">
-    <h2>OUR SERVICES</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-          <div class="card" style="width: 18rem; padding: 10px;">
-            <i class="fa-solid fa-trophy"></i>
-            <div class="card-body">
-              <h5 class="card-title"> TOURNAMENTS</h5>
-              <p class="card-text">Discover exciting local competitions. Browse our listings, join with a single click,
-                and prove your skills on the field. It's time to play.</p>
-            </div>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-1">
+            <img class="logo" src="./pics/web logo.png" alt="" />
           </div>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-          <div class="card" style="width: 18rem; padding: 10px;">
-            <i class="fa-solid fa-calendar-plus"></i>
-            <div class="card-body">
-              <h5 class="card-title">ORGANIZERS</h5>
-              <p class="card-text">Power your event from start to finish. We provide the tools to reach a wider audience
-                and run a professional tournament that players will love.</p>
-            </div>
+          <div class="col-md-3 fs-3 mt-1 fw-bold text-light">TOURNAFY</div>
+          <div class="col-md-2 fs-5 mt-2 text-secondary">
+            <a href="#Services">SERVICES</a>
           </div>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-          <div class="card" style="width: 18rem; padding: 10px;">
-            <i class="fa-solid fa-user"></i>
-            <div class="card-body">
-              <h5 class="card-title">SPORTS PERSON</h5>
-              <p class="card-text">Get recognized. Create your public profile, connect with other athletes, and climb
-                the local leaderboards. Let your performance do the talking.
-              </p>
-            </div>
+          <div class="col-md-2 fs-5 mt-2 text-secondary">
+            <a href="#Mission">MISSION</a>
           </div>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-          <div class="card" style="width: 18rem; padding: 10px;">
-            <i class="fa-solid fa-location-dot"></i>
-            <div class="card-body">
-              <h5 class="card-title">VENUES</h5>
-              <p class="card-text">Discover the best grounds, and sports facilities around your neighbourhood. Find the
-                perfect spot for your next game or event.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mission text-center mt-3 mb-3 p-3" id="Mission">
-    <h2>MISSION</h2>
-    <div class="container ">
-      <div class="row">
-        <div class="col-md-6 pic-mission" data-aos="fade-right">
-          <img src="./pics/davide-aracri-ohAr6vNawiI-unsplash.jpg" alt="nopic.jpg" style="width: 400px; height: 230px;">
-        </div>
-        <div class="col-md-6 text-mission" data-aos="fade-left">
-          <h3>Bringing Sports to the Heart of your Neighbourhood</h3>
-          <p>Our mission is to ignite the spirit of competition and camaraderie in every neighborhood. We believe that
-            sports have the power to connect us, challenge us, and make our communities stronger. Tournafy is the
-            platform where local talent gets a chance to shine.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="dev text-center p-3" style="background-color: #1E1E1E; color: #fff;" id="Dev" data-aos="fade-up">
-    <h2>MEET THE TEAM</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h3 style="color: #BDBDBD;">Under the Guidance of: </h3>
-          <div class="row">
-            <div class="col"><img src="./pics/Screenshot 2025-07-20 220427.png" alt="nopic"
-                style="border: 2px #BDBDBD solid; border-radius: 50%; width: 270px; height: 250px;"></div>
-            <div class="col p-2">
-              <p>NAME : <span class="fw-medium">RAJESH BANSAL</span></p>
-              <p style="color: #BDBDBD;">ROLE : A VERY SUPPORTIVE MENTOR<span class="fw-medium"></span></p>
-              <p style="color: #BDBDBD;">Rajesh K. Bansal (Sun Certified Java Programmer) 23 Years experience in
-                Training & Development. Founder of realJavaOnline.com . If you want to know more in depth about Java ,
-                buy his book "Real Java" available on amazon.in.</p>
-              <div class="mb-2"><i class="fa-solid fa-envelope" style="font-size: 20px;"></i> : bcebti@gmail.com</div>
-              <div><i class="fa-solid fa-phone" style="font-size: 20px;"></i> : 98722-46056</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <h3 style="color: #BDBDBD;">Developed By: </h3>
-          <div class="row">
-            <div class="col"> <img src="./pics/WhatsApp Image 2025-07-22 at 20.09.19_9a479831.jpg" alt="nopic"
-                style="border: 2px #BDBDBD solid; border-radius: 50%; width: 270px; height: 250px;"></div>
-            <div class="col p-2">
-              <p>NAME : <span class="fw-medium">HARDIK JINDAL</span></p>
-              <p style="color: #BDBDBD;">ROLE : <span class="fw-medium">FULL STACK DEV</span></p>
-              <p>A 2nd year Student in NSUT,Delhi</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="contact text-center mt-3 mb-5" style="color: white; background-color: #1E1E1E;" id="Contact"
-    data-aos="fade-down" data-aos-delay="200">
-    <h2>Get In Touch</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.627907431673!2d77.0358781753348!3d28.610937475676522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d05dd375e5a13%3A0x108adaa3abe4bd07!2sNetaji%20Subhas%20University%20of%20Technology!5e0!3m2!1sen!2sus!4v1753195425431!5m2!1sen!2sus"
-            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <div class="col-md-6">
-          <h5 style="color: #BDBDBD;">We'd love to hear from you!...</h5>
-          <div style="margin-top: 20px; text-align: start; padding-left: 220px;">
-            <div class="mb-2"> <i class="fa-solid fa-envelope" style="font-size: 20px;"></i> :
-              hardikjindal2020@gmail.com</div>
-            <div> <i class="fa-solid fa-phone" style="font-size: 20px;"></i> : +91 8847490738</div>
-          </div>
-          <h5 class="mt-4 mb-3">Follow US</h5>
-          <div class="links">
-            <a href="https://www.linkedin.com/in/hardik-jindal-a5b8a8325"><i class="fa-brands fa-linkedin"
-                style="font-size: 30px;"></i></a>
-            <a href="https://www.instagram.com/hardik_.jindal/"><i class="fa-brands fa-instagram"
-                style="font-size: 30px;"></i></a>
+          <div class="col-md-2 fs-5 mt-2 text-secondary">
+            <a href="#Contact">CONTACT US</a>
           </div>
 
+          <div class="col-md-1 mt-1">
+            <input
+              class="btn fw-medium"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              value="Login"
+              id="logbtn"
+            />
+          </div>
+          <div class="col-md-1 mt-1">
+            <input
+              class="btn btn-dark fw-medium"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              type="button"
+              value="Signup"
+              id="signbtn"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Modal Signup -->
-  <div class=" modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content text-light" style="background-color:#1E1E1E;color: #fff;">
-        <form>
-          <div class="modal-header" style="background-color: #FBC02D; color: #121212">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Signup</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="main">
+      <div
+        id="carouselExampleAutoplaying"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="./pics/wp1852918-badminton-wallpapers.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="txtEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp"
-                style="background-color: #333333;color: #fff;" />
-              <div id="emailHelp">
-                We'll never share your email with anyone else.
+          <div class="carousel-item">
+            <img src="./pics/basketball.avif" class="d-block w-100" alt="..." />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="services text-center" id="Services" data-aos="fade-down">
+      <h2>OUR SERVICES</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="card" style="width: 18rem; padding: 10px">
+              <i class="fa-solid fa-trophy"></i>
+              <div class="card-body">
+                <h5 class="card-title">TOURNAMENTS</h5>
+                <p class="card-text">
+                  Discover exciting local competitions. Browse our listings,
+                  join with a single click, and prove your skills on the field.
+                  It's time to play.
+                </p>
               </div>
             </div>
-            <div class="mb-3">
-              <label for="txtPwd" class="form-label">Password</label>
-              <input type="password" class="form-control" name="txtPwd" id="txtPwd"
-                style="background-color: #333333;color: #fff;" />
-            </div>
-            <div class="mb-3">
-              <label for="" class="form-label">User Type</label>
-              <select class="form-select" aria-label="Default select example" id="txtSel" name="txtSel"
-                style="background-color: #333333;color: #fff;">
-                <option selected>SELECT A OPTION</option>
-                <option value="Player">Player</option>
-                <option value="Organizer">Organizer</option>
-              </select>
+          </div>
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="card" style="width: 18rem; padding: 10px">
+              <i class="fa-solid fa-calendar-plus"></i>
+              <div class="card-body">
+                <h5 class="card-title">ORGANIZERS</h5>
+                <p class="card-text">
+                  Power your event from start to finish. We provide the tools to
+                  reach a wider audience and run a professional tournament that
+                  players will love.
+                </p>
+              </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="container text-center">
-              <button type="button" class="btn btn-primary btn" id="btn-signup">
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="card" style="width: 18rem; padding: 10px">
+              <i class="fa-solid fa-user"></i>
+              <div class="card-body">
+                <h5 class="card-title">SPORTS PERSON</h5>
+                <p class="card-text">
+                  Get recognized. Create your public profile, connect with other
+                  athletes, and climb the local leaderboards. Let your
+                  performance do the talking.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="card" style="width: 18rem; padding: 10px">
+              <i class="fa-solid fa-location-dot"></i>
+              <div class="card-body">
+                <h5 class="card-title">VENUES</h5>
+                <p class="card-text">
+                  Discover the best grounds, and sports facilities around your
+                  neighbourhood. Find the perfect spot for your next game or
+                  event.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mission text-center mt-3 mb-3 p-4"
+      id="Mission"
+      style="background-color: #1e1e1e; color: #fff"
+      data-aos="fade-down"
+    >
+      <h2>MISSION</h2>
+      <div class="container">
+        <div class="row align-items-center">
+          <div
+            class="col-md-6 text-center"
+            data-aos="fade-right"
+            style="padding: 20px"
+          >
+            <img
+              src="./pics/davide-aracri-ohAr6vNawiI-unsplash.jpg"
+              alt="Inspiring teamwork"
+              style="width: 100%; max-width: 500px; border-radius: 10px"
+            />
+          </div>
+          <div
+            class="col-md-6 text-start text-mission"
+            data-aos="fade-left"
+            style="padding: 20px"
+          >
+            <h3>Bringing Sports to the Heart of your Neighbourhood</h3>
+            <p style="font-size: 1.1em; line-height: 1.7">
+              Our mission is to ignite the spirit of competition and camaraderie
+              in every neighbourhood. We believe that sports have the power to
+              connect us, challenge us, and make our communities stronger.
+              Tournafy is the platform where local talent gets a chance to
+              shine.
+            </p>
+            <ul style="list-style: none; padding-left: 0; margin-top: 20px">
+              <li>
+                <i
+                  class="fa fa-check-circle"
+                  style="color: #fbc02d; margin-right: 10px"
+                ></i>
+                Connect with local players and organizers.
+              </li>
+              <li>
+                <i
+                  class="fa fa-check-circle"
+                  style="color: #fbc02d; margin-right: 10px"
+                ></i>
+                Discover and join exciting tournaments.
+              </li>
+              <li>
+                <i
+                  class="fa fa-check-circle"
+                  style="color: #fbc02d; margin-right: 10px"
+                ></i>
+                Empower local sports talent.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="dev text-light py-5"
+      style="background-color: #121212"
+      id="Dev"
+      data-aos="fade-up"
+    >
+      <div class="container text-center">
+        <h2
+          class="mb-5"
+          style="text-decoration: underline; text-decoration-color: #fbc02d"
+        >
+          MEET THE TEAM
+        </h2>
+
+        <div class="row">
+          <div
+            class="col-lg-6 mb-5 mb-lg-0"
+            data-aos="fade-right"
+            data-aos-delay="100"
+          >
+            <div
+              class="p-4"
+              style="
+                background-color: #1e1e1e;
+                border-radius: 15px;
+                height: 100%;
+              "
+            >
+              <img
+                src="./pics/Screenshot 2025-07-20 220427.png"
+                alt="Rajesh Bansal"
+                style="
+                  border: 3px #fbc02d solid;
+                  border-radius: 50%;
+                  width: 200px;
+                  height: 200px;
+                  object-fit: cover;
+                "
+              />
+
+              <h4 class="mt-4 mb-1">RAJESH BANSAL</h4>
+              <p class="mb-3" style="color: #fbc02d; font-weight: 500">
+                Mentor & Founder of realJavaOnline.com
+              </p>
+
+              <p class="text-start" style="color: #bdbdbd">
+                With 23 years of experience in Training & Development, Rajesh K.
+                Bansal (Sun Certified Java Programmer) provided the expert
+                guidance that made this project possible.
+              </p>
+
+              <div class="text-start mt-4">
+                <div class="mb-2">
+                  <i
+                    class="fa-solid fa-envelope"
+                    style="font-size: 20px; color: #fbc02d; width: 30px"
+                  ></i>
+                  <a href="mailto:bcebti@gmail.com" class="text-light"
+                    >bcebti@gmail.com</a
+                  >
+                </div>
+                <div>
+                  <i
+                    class="fa-solid fa-phone"
+                    style="font-size: 20px; color: #fbc02d; width: 30px"
+                  ></i>
+                  <span>+91 98722-46056</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+            <div
+              class="p-4"
+              style="
+                background-color: #1e1e1e;
+                border-radius: 15px;
+                height: 100%;
+              "
+            >
+              <img
+                src="./pics/WhatsApp Image 2025-07-22 at 20.09.19_9a479831.jpg"
+                alt="Hardik Jindal"
+                style="
+                  border: 3px #fbc02d solid;
+                  border-radius: 50%;
+                  width: 200px;
+                  height: 200px;
+                  object-fit: cover;
+                "
+              />
+
+              <h4 class="mt-4 mb-1">HARDIK JINDAL</h4>
+              <p class="mb-3" style="color: #fbc02d; font-weight: 500">
+                Full Stack Developer
+              </p>
+
+              <p style="color: #bdbdbd">
+                A passionate 2nd-year engineering student at NSUT, Delhi, who
+                designed and developed Tournafy from the ground up.
+              </p>
+
+              <div class="mt-4">
+                <p class="mb-2" style="color: #bdbdbd">Connect with me:</p>
+                <a
+                  href="https://www.linkedin.com/in/hardik-jindal-a5b8a8325"
+                  class="me-3"
+                  ><i class="fa-brands fa-linkedin" style="font-size: 30px"></i
+                ></a>
+                <a href="https://www.instagram.com/hardik_.jindal/" class="me-3"
+                  ><i class="fa-brands fa-instagram" style="font-size: 30px"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="contact text-center mt-3 mb-5"
+      style="color: white; background-color: #1e1e1e; padding: 40px 0"
+      id="Contact"
+      data-aos="fade-down"
+      data-aos-delay="200"
+    >
+      <h2>Get In Touch</h2>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6" data-aos="fade-right">
+            <img
+              src="./pics/contact-image.jpg"
+              alt="Contact Us"
+              style="width: 100%; max-width: 450px; border-radius: 10px"
+            />
+          </div>
+          <div
+            class="col-md-6 text-start p-4"
+            data-aos="fade-left"
+            style="
+              background-color: #2c2c2c;
+              border-radius: 10px;
+              padding: 30px;
+            "
+          >
+            <h3 style="color: #fbc02d; margin-bottom: 20px">Reach Us</h3>
+            <form>
+              <div class="mb-3">
+                <label
+                  for="contactName"
+                  class="form-label"
+                  style="color: #bdbdbd"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contactName"
+                  name="contactName"
+                  placeholder="Your Name"
+                  style="
+                    background-color: #333333;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px;
+                  "
+                />
+              </div>
+              <div class="mb-3">
+                <label
+                  for="contactEmail"
+                  class="form-label"
+                  style="color: #bdbdbd"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="contactEmail"
+                  name="contactEmail"
+                  placeholder="Your Email"
+                  style="
+                    background-color: #333333;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px;
+                  "
+                />
+              </div>
+              <div class="mb-3">
+                <label
+                  for="contactMessage"
+                  class="form-label"
+                  style="color: #bdbdbd"
+                  >Message</label
+                >
+                <textarea
+                  class="form-control"
+                  id="contactMessage"
+                  name="contactMessage"
+                  rows="4"
+                  placeholder="Your Message"
+                  style="
+                    background-color: #333333;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px;
+                  "
+                ></textarea>
+              </div>
+              <input
+                type="submit"
+                class="btn btn-primary"
+                style="
+                  background-color: #fbc02d;
+                  color: #1e1e1e;
+                  border: none;
+                  border-radius: 20px;
+                  padding: 10px 25px;
+                "
+                id="bttnMssg"
+              >
+                Send Message
+            </input>
+            </form>
+
+            <div style="margin-top: 30px; text-align: start">
+              <h5 style="color: #bdbdbd">Or connect with us directly:</h5>
+              <div class="mb-2">
+                <i
+                  class="fa-solid fa-envelope"
+                  style="font-size: 20px; color: #fbc02d; margin-right: 10px"
+                ></i>
+                : hardikjindal2020@gmail.com
+              </div>
+              <div>
+                <i
+                  class="fa-solid fa-phone"
+                  style="font-size: 20px; color: #fbc02d; margin-right: 10px"
+                ></i>
+                : +91 8847490738
+              </div>
+            </div>
+            <h5 class="mt-4 mb-3" style="color: #bdbdbd">Follow US</h5>
+            <div class="links" style="margin-left: 0; display: flex; gap: 20px">
+              <a href="https://www.linkedin.com/in/hardik-jindal-a5b8a8325"
+                ><i
+                  class="fa-brands fa-linkedin"
+                  style="font-size: 30px; color: #fff"
+                ></i
+              ></a>
+              <a href="https://www.instagram.com/hardik_.jindal/"
+                ><i
+                  class="fa-brands fa-instagram"
+                  style="font-size: 30px; color: #fff"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.627907431673!2d77.0358781753348!3d28.610937475676522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d05dd375e5a13%3A0x108adaa3abe4bd07!2sNetaji%20Subhas%20University%20of%20Technology!5e0!3m2!1sen!2sus!4v1753195425431!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0; border-radius: 10px"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Signup -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div
+          class="modal-content text-light"
+          style="background-color: #1e1e1e; color: #fff"
+        >
+          <form>
+            <div
+              class="modal-header"
+              style="background-color: #fbc02d; color: #121212"
+            >
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Signup</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="txtEmail" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="txtEmail"
+                  name="txtEmail"
+                  aria-describedby="emailHelp"
+                  style="background-color: #333333; color: #fff"
+                />
+                <div id="emailHelp">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="txtPwd" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="txtPwd"
+                  id="txtPwd"
+                  style="background-color: #333333; color: #fff"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">User Type</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  id="txtSel"
+                  name="txtSel"
+                  style="background-color: #333333; color: #fff"
+                >
+                  <option selected>SELECT A OPTION</option>
+                  <option value="Player">Player</option>
+                  <option value="Organizer">Organizer</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="container text-center">
+                <button
+                  type="button"
+                  class="btn btn-primary btn"
+                  id="btn-signup"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Login-->
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div
+          class="modal-content"
+          style="background-color: #1e1e1e; color: #fff"
+        >
+          <form>
+            <div
+              class="modal-header"
+              style="background-color: #fbc02d; color: #121212"
+            >
+              <h1 class="modal-title fs-5" id="exampleModalLabel2">Login</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="txtEmail2" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="txtEmail2"
+                  name="txtEmail2"
+                  aria-describedby="emailHelp"
+                  style="background-color: #333333; color: #fff"
+                />
+                <div id="emailHelp" class="form-text" style="color: #fff">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="txtPwd2" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="txtPwd2"
+                  id="txtPwd2"
+                  style="background-color: #333333; color: #fff"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-end" style="margin-right: 10px">
+                <input
+                  type="button"
+                  data-bs-target="#exampleModal3"
+                  data-bs-toggle="modal"
+                  class="btn fw-bold"
+                  value="Forgot Password ?"
+                  style="border: none; color: #fbc02d"
+                />
+              </div>
+            </div>
+            <div class="text-center mb-3">
+              <button
+                type="button"
+                class="btn"
+                id="btn-login"
+                style="background-color: #fbc02d; color: #1e1e1e"
+              >
                 Submit
               </button>
             </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- Modal Login-->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="background-color: #1E1E1E; color: #fff;">
-        <form>
-          <div class="modal-header" style="background-color: #FBC02D; color: #121212;">
-            <h1 class="modal-title fs-5" id="exampleModalLabel2">Login</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="txtEmail2" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="txtEmail2" name="txtEmail2" aria-describedby="emailHelp"
-                style="background-color: #333333; color: #fff;" />
-              <div id="emailHelp" class="form-text" style="color: #fff;">
-                We'll never share your email with anyone else.
+            <div class="text-center row">
+              <div class="col">
+                Don't have an account?
+                <input
+                  type="button"
+                  data-bs-target="#exampleModal"
+                  data-bs-toggle="modal"
+                  class="btn fw-bold"
+                  value="Register Now"
+                  style="border: none; color: #fbc02d"
+                />
               </div>
             </div>
-            <div class="mb-3">
-              <label for="txtPwd2" class="form-label">Password</label>
-              <input type="password" class="form-control" name="txtPwd2" id="txtPwd2"
-                style="background-color: #333333; color: #fff;" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col text-end" style="margin-right: 10px">
-              <input type="button" data-bs-target="#exampleModal3" data-bs-toggle="modal" class="btn fw-bold"
-                value="Forgot Password ?" style="border: none; color: #FBC02D;" />
-            </div>
-          </div>
-          <div class="text-center mb-3">
-            <button type="button" class="btn" id="btn-login" style="background-color: #FBC02D; color: #1e1e1e;">
-              Submit
-            </button>
-          </div>
-          <div class="text-center row">
-            <div class="col">
-              Don't have an account?
-              <input type="button" data-bs-target="#exampleModal" data-bs-toggle="modal" class="btn fw-bold"
-                value="Register Now" style="border: none; color: #FBC02D;" />
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Forgot PWD -->
-  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <form>
-            <label for="txtEmail3" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="txtEmail3" aria-describedby="emailHelp" />
           </form>
         </div>
-        <input type="button" class="btn btn-primary" value="Submit" id="bttnForgotPwd" />
       </div>
     </div>
-  </div>
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      // Optional settings you can use
-      duration: 800, // values from 0 to 3000, with step 50ms
-      once: true, // whether animation should happen only once - while scrolling down
-    });
-  </script>
-</body>
-<!-- <div class="container text-center mt-3">
+
+    <!-- Modal Forgot PWD -->
+    <div
+      class="modal fade"
+      id="exampleModal3"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form>
+              <label for="txtEmail3" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="txtEmail3"
+                aria-describedby="emailHelp"
+              />
+            </form>
+          </div>
+          <input
+            type="button"
+            class="btn btn-primary"
+            value="Submit"
+            id="bttnForgotPwd"
+          />
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        // Optional settings you can use
+        duration: 800, // values from 0 to 3000, with step 50ms
+        once: true, // whether animation should happen only once - while scrolling down
+      });
+    </script>
+  </body>
+  <!-- <div class="container text-center mt-3">
     <a href="/org-dash" class="btn btn-light">Org Dash</a>
       <a href="/player-dash" class="btn btn-info">Player Dash</a>
       <a href="/admin-dash" class="btn btn-info"> Admin Dash</a>
   </div> -->
-<script>
-  $(document).ready(function () {
-    /*-----------------------*/
-    $("#btn-signup").click(function () {
-      let obj = {
-        type: "get",
-        url: "/signup-details",
-        data: {
-          txtEmail: $("#txtEmail").val(),
-          txtPwd: $("#txtPwd").val(),
-        },
-      };
-      $.ajax(obj)
-        .then(function (response) {
-          alert(response);
-          // alert( JSON.stringify(response));
-        })
-        .fail(function (error) {
-          alert("Something WENT wrong.....");
-        });
-    });
+  <script>
+    $(document).ready(function () {
+      /*-----------------------*/
+      $("#btn-signup").click(function () {
+        let obj = {
+          type: "get",
+          url: "/signup-details",
+          data: {
+            txtEmail: $("#txtEmail").val(),
+            txtPwd: $("#txtPwd").val(),
+          },
+        };
+        $.ajax(obj)
+          .then(function (response) {
+            alert(response);
+            // alert( JSON.stringify(response));
+          })
+          .fail(function (error) {
+            alert("Something WENT wrong.....");
+          });
+      });
 
-    $("#btn-login").click(function () {
-      let obj = {
-        type: "get",
-        url: "/login-details",
-        data: {
-          txtEmail: $("#txtEmail2").val(),
-          txtPwd: $("#txtPwd2").val(),
-          txtSel: $("#txtSel2").val(),
-        },
-      };
-      $.ajax(obj)
-        .then(function (response) {
-          if (response[0].status == 0) alert("BLOCKED");
-          else {
-            localStorage.setItem("activeUser", response[0].emailid);
-            if (response[0].usertype == "Player")
-              location.href = "./Player html files/dash-player.html";
-            else if (response[0].usertype == "Organizer")
-              location.href = "./Organizers html files/dash-organizer.html";
-            else location.href = "./Admin html files/dash-admin.html";
+      $("#btn-login").click(function () {
+        let obj = {
+          type: "get",
+          url: "/login-details",
+          data: {
+            txtEmail: $("#txtEmail2").val(),
+            txtPwd: $("#txtPwd2").val(),
+            txtSel: $("#txtSel2").val(),
+          },
+        };
+        $.ajax(obj)
+          .then(function (response) {
+            if (response[0].status == 0) alert("BLOCKED");
+            else {
+              localStorage.setItem("activeUser", response[0].emailid);
+              if (response[0].usertype == "Player")
+                location.href = "./Player html files/dash-player.html";
+              else if (response[0].usertype == "Organizer")
+                location.href = "./Organizers html files/dash-organizer.html";
+              else location.href = "./Admin html files/dash-admin.html";
+            }
+            // alert( JSON.stringify(response));
+          })
+          .fail(function (error) {
+            alert("Something WENT wrong.....");
+          });
+      });
+
+      $("#bttnForgotPwd").click(function () {
+        let obj = {
+          type: "get",
+          url: "/forgot-pwd",
+          data: {
+            txtEmail: $("#txtEmail3").val(),
+          },
+        };
+        $.ajax(obj)
+          .then(function (response) {
+            alert(response);
+          })
+          .fail(function (error) {
+            alert("Something WENT wrong.....");
+          });
+      });
+
+      $('#bttnMssg').click(function(){
+        let obj = {
+          type: "get",
+          url: "/mail-Mssg",
+          data:{
+            txtName:$('#contactName').val(),
+            txtEmail:$('#contactEmail').val(),
+            txtMssg:$('#contactMssg').val()
           }
-          // alert( JSON.stringify(response));
-        })
-        .fail(function (error) {
-          alert("Something WENT wrong.....");
-        });
+        }
+      })
     });
-
-    $("#bttnForgotPwd").click(function () {
-      let obj = {
-        type: "get",
-        url: "/forgot-pwd",
-        data: {
-          txtEmail: $("#txtEmail3").val(),
-        },
-      };
-      $.ajax(obj)
-        .then(function (response) {
-          alert(response);
-        })
-        .fail(function (error) {
-          alert("Something WENT wrong.....");
-        });
-    });
-  });
-</script>
-
+  </script>
 </html>

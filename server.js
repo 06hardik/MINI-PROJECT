@@ -462,3 +462,32 @@ app.get("/forgot-pwd", async function (req, resp) {
     resp.status(500).send("Server error.");
   }
 });
+app.get("/mail-Mssg", async function (req, resp) {
+  try {
+    const transporter = await nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: "hardikjindal2020@gmail.com",
+        pass: "wdty putp uzbv cxdy",
+      },
+    });
+    const mailOptions = {
+      from: {
+        name: "hardik",
+        address: "hardikjindal2020@gmail.com",
+      },
+      to: [req.query.txtEmail],
+      subject: "Here is your Password...",
+      text: `Hi How are You? Please do not forget the password Again !!! 
+    
+    Password : ${pwd}`,
+    };
+    await transporter.sendMail(mailOptions);
+    resp.send("Password sent at your Email address");
+  } catch (error) {
+    console.error("Error in /forgot-pwd:", error);
+    resp.status(500).send("Server error.");
+  }
+});
