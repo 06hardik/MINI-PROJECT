@@ -483,7 +483,6 @@ app.post("/mail-Mssg", async function (req, resp) {
       text: `${req.body.txtMssg}`
     };
     await transporter.sendMail(mailOptions);
-    console.log('hi3')
     resp.send("Message sent successfully! Thank you for getting in touch.");
   } catch (error) {
     console.error("Error in /forgot-pwd:", error);
